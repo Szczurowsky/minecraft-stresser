@@ -10,6 +10,7 @@ and fix any vulnerability easily with guide.
 ## Modules
 
 - malformed_packet - sends a lot of malformed packets to server
+- null_ping - sends handshake packet with wrong next state field
 
 ## Special thanks
 Special thanks for KernelErr0r, Error and NNorbert for substantive help and good will
