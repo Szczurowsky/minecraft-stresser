@@ -11,7 +11,7 @@ and fix any vulnerability easily with guide.
 
 - malformed_packet - sends a lot of malformed packets to server
 - null_ping - sends handshake packet with wrong next state field
-- 
+- big_handshake - sends large handshake packet
 ## Wiki
 Better info and protection methods can be found in project [wiki](https://github.com/Szczurowsky/minecraft-stresser/wiki).
 You can also find the installation method here

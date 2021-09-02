@@ -1,9 +1,9 @@
-from packet import malformed_packet, null_ping
+from packet import malformed_packet, null_ping, big_handshake
 from argparse import ArgumentParser, ArgumentTypeError
 
 
 def check_module(module):
-    modules = ["malformed_packet", "null_ping"]
+    modules = ["malformed_packet", "null_ping", "big_handshake"]
     if module in modules:
         return module
     raise ArgumentTypeError("Module not in list:", modules)
@@ -29,5 +29,7 @@ if __name__ == '__main__':
         malformed_packet.MalformedPacket(int(args.time), int(args.threads), args.address, int(args.port), int(args.pps))
     elif args.module == "null_ping":
         null_ping.NullPing(int(args.time), int(args.threads), args.address, int(args.port), int(args.pps))
+    elif args.module == "big_handshake":
+        big_handshake.BigHandshake(int(args.time), int(args.threads), args.address, int(args.port), int(args.pps))
 
 
