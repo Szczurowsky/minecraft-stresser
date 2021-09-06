@@ -1,9 +1,9 @@
-from packet import malformed_packet, null_ping, big_handshake, login_spam
+from packet import malformed_packet, null_ping, big_handshake, login_spam, double_login
 from argparse import ArgumentParser, ArgumentTypeError
 
 
 def check_module(module):
-    modules = ["malformed_packet", "null_ping", "big_handshake", "login_spam"]
+    modules = ["malformed_packet", "null_ping", "big_handshake", "login_spam", "double_login"]
     if module in modules:
         return module
     raise ArgumentTypeError("Module not in list:", modules)
@@ -37,5 +37,11 @@ if __name__ == '__main__':
         if args.protocol is not None:
             login_spam.LoginSpam(int(args.time), int(args.threads), args.address, int(args.port), int(args.pps),
                                  int(args.protocol))
+        else:
+            print("Specify protocol version -pv")
+    elif args.module == "double_login":
+        if args.protocol is not None:
+            double_login.DoubleLogin(int(args.time), int(args.threads), args.address, int(args.port), int(args.pps),
+                                     int(args.protocol))
         else:
             print("Specify protocol version -pv")
